@@ -1,20 +1,56 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
 
-export default function App() {
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Feather } from "@expo/vector-icons";
+
+import CurrentWeather from "./src/components/CurrentWeather/CurrentWeather";
+import UpcomingWeather from "./src/components/UpcomingWeather/UpcomingWeather";
+import City from "./src/components/City/City";
+
+const Tab = createBottomTabNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={{
+          tabBarActiveTintColor: "tomato",
+          tabBarActiveTintColor: "grey",
+          tabBarShowLabel: false,
+          tabBarNa
+        }}
+      >
+        <Tab.Screen
+          name={"City"}
+          component={City}
+          options={{
+            tabBarIcon: (focused) => (
+              <Feather
+                name={"droplet"}
+                size={25}
+                color={focused ? "tomato" : "black"}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name={"Upcoming"}
+          component={UpcomingWeather}
+          options={{
+            tabBarIcon: (focused) => (
+              <Feather
+                name={"clock"}
+                size={25}
+                color={focused ? "tomato" : "black"}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen name={"Current"} component={CurrentWeather} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
