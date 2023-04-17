@@ -44,7 +44,6 @@ export const useGetWeather = () => {
 
   useEffect(() => {
     if (!location) {
-      setLocation({});
       return;
     }
 
