@@ -1,13 +1,13 @@
-import { StyleSheet, StatusBar } from "react-native";
+import { StyleSheet } from "react-native";
+import { themeColor } from "../../../theme";
 
 export const styles = StyleSheet.create({
   safeContainer: {
     flex: 1,
-    backgroundColor: "yellow",
+    backgroundColor: themeColor.primary,
   },
-
   container: {
-    marginTop: (StatusBar.currentHeight || 0) + 10,
+    marginTop: 10,
     flex: 1,
     gap: 10,
   },

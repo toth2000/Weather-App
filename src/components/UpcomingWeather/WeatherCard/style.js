@@ -1,10 +1,14 @@
 import { StyleSheet } from "react-native";
+import { themeColor } from "../../../../theme";
 
 export const styles = StyleSheet.create({
   container: {
-    backgroundColor: "green",
+    backgroundColor: themeColor.alternate,
     height: 100,
-    margin: 5,
+    marginTop: 5,
+    marginBottom: 5,
+    marginLeft: 8,
+    marginRight: 8,
     borderRadius: 5,
   },
   wrapper: {
@@ -17,11 +21,11 @@ export const styles = StyleSheet.create({
     gap: 15,
   },
   dateText: {
-    fontSize: 25,
+    fontSize: 20,
   },
   description: {
-    fontSize: 30,
+    fontSize: 25,
   },
   minMaxText: {},
-  otherText: { fontSize: 18 },
+  otherText: { fontSize: 16 },
 });

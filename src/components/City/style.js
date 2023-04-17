@@ -1,20 +1,22 @@
 import { StyleSheet, StatusBar } from "react-native";
+import { themeColor } from "../../../theme";
 
 export const styles = StyleSheet.create({
   safeContainer: {
-    flex: 1,
-    backgroundColor: "teal",
+    height: 200,
+    backgroundColor: themeColor.alternate,
+    borderRadius: 25,
+    marginLeft: 15,
+    marginRight: 15,
   },
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
     alignItems: "center",
-    padding: 10,
+    justifyContent: "center",
   },
   iconWrapper: {
     flexDirection: "row",
-    backgroundColor: "yellow",
-    margin: 25,
+    margin: 10,
     gap: 50,
   },
   timeIconWrapper: {
@@ -29,6 +31,6 @@ export const styles = StyleSheet.create({
     fontSize: 35,
   },
   timeText: {
-    fontSize: 28,
+    fontSize: 20,
   },
 });

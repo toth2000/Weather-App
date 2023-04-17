@@ -1,55 +1,38 @@
 import React from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Feather } from "@expo/vector-icons";
+import { ActivityIndicator, View, Text } from "react-native";
 
-import CurrentWeather from "./src/components/CurrentWeather/CurrentWeather";
-import UpcomingWeather from "./src/components/UpcomingWeather/UpcomingWeather";
-import City from "./src/components/City/City";
+import Tabs from "./src/components/Tabs/Tabs";
+import { themeColor } from "./theme";
 
-const Tab = createBottomTabNavigator();
+import { styles } from "./style";
+
+// import { API_KEY } from "@env";
+
+import { useGetWeather } from "./src/hooks/useGetWeather";
 
 const App = () => {
+  const [isLoading, error, weather] = useGetWeather();
+
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={{
-          tabBarActiveTintColor: "tomato",
-          tabBarActiveTintColor: "grey",
-          tabBarShowLabel: false,
-          tabBarNa
-        }}
-      >
-        <Tab.Screen
-          name={"City"}
-          component={City}
-          options={{
-            tabBarIcon: (focused) => (
-              <Feather
-                name={"droplet"}
-                size={25}
-                color={focused ? "tomato" : "black"}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name={"Upcoming"}
-          component={UpcomingWeather}
-          options={{
-            tabBarIcon: (focused) => (
-              <Feather
-                name={"clock"}
-                size={25}
-                color={focused ? "tomato" : "black"}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen name={"Current"} component={CurrentWeather} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <>
+      {error ? (
+        <View style={styles.container}>
+          <Text style={styles.errorText}> {error} </Text>
+        </View>
+      ) : (
+        <NavigationContainer>
+          {isLoading ? (
+            <View style={styles.container}>
+              <ActivityIndicator size={"large"} color={themeColor.secodary} />
+            </View>
+          ) : (
+            <Tabs weather={weather} />
+          )}
+        </NavigationContainer>
+      )}
+    </>
   );
 };
 

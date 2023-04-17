@@ -2,26 +2,38 @@ import React from "react";
 
 import { Text, View, SafeAreaView } from "react-native";
 
-import { Ionicons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 
+import City from "../City/City";
 import { styles } from "./style";
+import { themeColor } from "../../../theme";
+import { weatherType } from "../../utilities/weatherType";
 
-const CurrentWeather = () => {
+const CurrentWeather = ({ weather }) => {
+  const { feels_like, temp, temp_max, temp_min } = weather?.list[0]?.main;
+  const { main } = weather?.list[0]?.weather[0];
+
   return (
     <SafeAreaView style={styles.safeContainer}>
+      <City city={weather?.city} />
       <View style={styles.container}>
-        <Text>Current Weather</Text>
-        <Ionicons name="sunny-outline" size={100} color="black" />
-        <Text style={styles.tempText}>6</Text>
-        <Text style={styles.feelText}>Feels Like 3</Text>
+        <Feather
+          name={weatherType[main].icon}
+          size={100}
+          color={themeColor.textColor}
+        />
+        <Text style={styles.tempText}>{temp} &#8451;</Text>
+        <Text style={styles.feelText}>
+          {`Feels Like: ${feels_like}`} &#8451;
+        </Text>
         <View style={styles.highLowWrapper}>
-          <Text style={styles.highLowText}>High: 5</Text>
-          <Text style={styles.highLowText}>Low: 10</Text>
+          <Text style={styles.highLowText}>{`High: ${temp_max}`} &#8451;</Text>
+          <Text style={styles.highLowText}>{`Low: ${temp_min}`} &#8451;</Text>
         </View>
       </View>
       <View style={styles.descriptionWrapper}>
-        <Text style={styles.descriptionText}>It's Sunny</Text>
-        <Text style={styles.messageText}>It's Perferct Sleeping Weather</Text>
+        <Text style={styles.descriptionText}>{main}</Text>
+        <Text style={styles.messageText}>{weatherType[main].message}</Text>
       </View>
     </SafeAreaView>
   );
